@@ -1,0 +1,14 @@
+name = "RFR"
+version = "0.1.0"
+license = "license"
+author = "Jane Doe"
+maintainer = "jane.doe@example.com"
+copyright = "Copyright 2023, Jane Doe"
+[build]
+auto-executables = true
+auto-tests = true
+auto-examples = true
+[install]
+library = false
+[dependencies]
+pyplot-fortran = { git="https://github.com/jacobwilliams/pyplot-fortran.git" }
