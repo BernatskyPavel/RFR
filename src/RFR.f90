@@ -1,13 +1,13 @@
 module RFR
    private
 
-   PUBLIC :: GENRFR
+   PUBLIC :: GENRFR, GENER, BUCK
 contains
-   
+
 ! Алгоритм генерирования размещений по радиальной функции распределения
 !
 !############################################################
-!     SUBROUTINE
+!     SUBROUTINE GENRFR
 !############################################################
 !
 !
@@ -96,13 +96,13 @@ contains
                RF1N(I)=RF0N(I)
                S1(I)=S0(I)
             END DO
-            !---------- ВЫБОР НОМЕРА ТОЧКИ ------------------------------
+!---------- ВЫБОР НОМЕРА ТОЧКИ ------------------------------
             CALL GENER(IS,A)
             NOM=INT(A*N)+1
-            !--------- ОПРЕДЕЛЕНИЕ СОСЕДЕЙ И РАССТОЯНИЯ ДО НИХ ----------
+!--------- ОПРЕДЕЛЕНИЕ СОСЕДЕЙ И РАССТОЯНИЯ ДО НИХ ----------
             XJ=X(NOM)
             YJ=Y(NOM)
-            !--------- ОПРЕДЕЛЕНИЕ НОМЕРА ЦЕНТРАЛЬНОГО BUCKET'А ---------
+!--------- ОПРЕДЕЛЕНИЕ НОМЕРА ЦЕНТРАЛЬНОГО BUCKET'А ---------
             IXX=INT(XJ/XSTEP)+1
             IYY=INT(YJ/YSTEP)+1
             DO JY=1,3
@@ -239,20 +239,20 @@ contains
             IF(PRO.LT.PROB) GO TO 250
          END DO
       END DO
-      !------- КОНЕЦ ЦИКЛА ПРОЦЕДУРЫ МЕТРОПОЛИСА ------------------
+!------- КОНЕЦ ЦИКЛА ПРОЦЕДУРЫ МЕТРОПОЛИСА ------------------
 2000  CONTINUE
       DO I=1,K1
          RK(I) = SQRT(RK(I))
       END DO
       RETURN
    END SUBROUTINE
-   !
-   !
-   !############################################################
-   !     SUBROUTINE BUCK
-   !############################################################
-   !
-   !
+!
+!
+!############################################################
+!     SUBROUTINE BUCK
+!############################################################
+!
+!
    SUBROUTINE BUCK(X,Y,N,XM,YM,NREFER,NBUC,NX,NY,NXY)
       REAL*8, DIMENSION(:) :: X(N),Y(N)
       INTEGER NX,NY,NXY,NBUC(N),NREFER(2,NXY)
@@ -287,13 +287,13 @@ contains
       END DO
       RETURN
    END SUBROUTINE
-   !
-   !
-   !############################################################
-   !     SUBROUTINE RFR
-   !############################################################
-   !
-   !
+!
+!
+!############################################################
+!     SUBROUTINE RFR
+!############################################################
+!
+!
    SUBROUTINE RFR1(N1,XX,YY,X,Y,ALF,EPS,RMAX,RF,RK,&
       S,K1,KEY)
       !############################################################
@@ -358,13 +358,13 @@ contains
 224   FORMAT (1X,'RFR',10F11.4)
       RETURN
    END SUBROUTINE
-   !
-   !
-   !############################################################
-   !     SUBROUTINE AREA1
-   !############################################################
-   !
-   !
+!
+!
+!############################################################
+!     SUBROUTINE AREA1
+!############################################################
+!
+!
    SUBROUTINE AREA1(XX,YY,X,Y,K1,RK,S,RH2,KEY)
       REAL*8, DIMENSION(:) :: RK(K1),S(K1)
       REAL*8 S01,XX,YY,H,G,X,Y,RH2,ORH2,RR2,RR
@@ -416,13 +416,13 @@ contains
       CALL CROSS1(K1,RK,S,ORH2,H,G,KEY)
       RETURN
    END SUBROUTINE
-   !
-   !
-   !############################################################
-   !     SUBROUTINE SEGM1
-   !############################################################
-   !
-   !
+!
+!
+!############################################################
+!     SUBROUTINE SEGM1
+!############################################################
+!
+!
    SUBROUTINE SEGM1(K1,RK,S,ORH2,X,KEY)
       REAL*8, DIMENSION(:) :: RK(K1),S(K1)
       REAL*8 C,P,ORH2,X,X2
@@ -440,13 +440,13 @@ contains
       END DO
       RETURN
    END SUBROUTINE
-   !
-   !
-   !############################################################
-   !     SUBROUTINE CROSS1
-   !############################################################
-   !
-   !
+!
+!
+!############################################################
+!     SUBROUTINE CROSS1
+!############################################################
+!
+!
    SUBROUTINE CROSS1(K1,RK,S,ORH2,X,Y,KEY)
       REAL*8, DIMENSION(:) :: RK(K1),S(K1)
       REAL*8 A,B,P,C,X,Y,X2,Y2,ORH2
@@ -467,13 +467,13 @@ contains
       END DO
       RETURN
    END SUBROUTINE
-   !
-   !
-   !############################################################
-   !     SUBROUTINE RASST
-   !############################################################
-   !
-   !
+!
+!
+!############################################################
+!     SUBROUTINE RASST
+!############################################################
+!
+!
    SUBROUTINE RASST(RF,RF1,RK,K1,RASS)
       REAL*8, DIMENSION (:) :: RF(K1),RF1(K1),RK(K1)
       REAL*8 W, RASS
@@ -488,13 +488,13 @@ contains
       RASS=RASS/SQRT(RK(K1))
       RETURN
    END SUBROUTINE
-   !
-   !
-   !############################################################
-   !     SUBROUTINE AREA
-   !############################################################
-   !
-   !
+!
+!
+!############################################################
+!     SUBROUTINE AREA
+!############################################################
+!
+!
    SUBROUTINE AREA(N1,XX,YY,X,Y,K1,RK,S,RH2)
       REAL*8, DIMENSION(:) :: X(N1),Y(N1),RK(K1),S(K1)
       REAL*8 G,H,XX,YY,RH2,ORH2,RR2,RR,S0
@@ -547,13 +547,13 @@ contains
       H=XX-X(I)
       GO TO 30
    END SUBROUTINE
-   !
-   !
-   !############################################################
-   !     SUBROUTINE SEGM
-   !############################################################
-   !
-   !
+!
+!
+!############################################################
+!     SUBROUTINE SEGM
+!############################################################
+!
+!
    SUBROUTINE SEGM(K1,RK,S,ORH2,X)
       REAL*8, DIMENSION(:) :: RK(K1),S(K1)
       REAL*8 C,P,X,X2,ORH2
@@ -567,13 +567,13 @@ contains
       END DO
       RETURN
    END SUBROUTINE
-   !
-   !
-   !############################################################
-   !     SUBROUTINE CROSS
-   !############################################################
-   !
-   !
+!
+!
+!############################################################
+!     SUBROUTINE CROSS
+!############################################################
+!
+!
    SUBROUTINE CROSS(K1,RK,S,ORH2,X,Y)
       REAL*8, DIMENSION(:) :: RK(K1),S(K1)
       REAL*8 X,Y,A,B,C,P,X2,Y2,ORH2
@@ -591,13 +591,13 @@ contains
       END DO
       RETURN
    END SUBROUTINE
-   !
-   !
-   !############################################################
-   !     SUBROUTINE IENT
-   !############################################################
-   !
-   !
+!
+!
+!############################################################
+!     SUBROUTINE IENT
+!############################################################
+!
+!
    INTEGER FUNCTION IENT(X)
       REAL*8 X
       IF(X.LT.0) THEN
@@ -606,13 +606,13 @@ contains
          IENT=INT(X)
       END IF
    END FUNCTION
-   !
-   !
-   !############################################################
-   !     SUBROUTINE IENT
-   !############################################################
-   !
-   !
+!
+!
+!############################################################
+!     SUBROUTINE IENT
+!############################################################
+!
+!
    REAL*8 FUNCTION SIGN1(X)
       IF(X.GT.0) THEN
          SIGN1=1.
@@ -623,13 +623,13 @@ contains
       END IF
       RETURN
    END FUNCTION
-   !
-   !
-   !############################################################
-   !     SUBROUTINE GENER
-   !############################################################
-   !
-   !
+!
+!
+!############################################################
+!     SUBROUTINE GENER
+!############################################################
+!
+!
    SUBROUTINE GENER(IS, A)
       INTEGER IS
       REAL*8 A
@@ -638,7 +638,7 @@ contains
       !   IS=IS-INT(SIGN1(IS/67108864.)*67108864.)
       !   A=IS/67108864
       RETURN
-   END SUBROUTINE
+   END SUBROUTINE GENER
 
    SUBROUTINE SRAND1()
       INTEGER, ALLOCATABLE :: SEED(:)
@@ -647,7 +647,249 @@ contains
       ALLOCATE(SEED(N))
       CALL RANDOM_SEED(GET=SEED)
       CALL SRAND(SEED(N))
-   END SUBROUTINE
+   END SUBROUTINE SRAND1
 
+! АЛГОРИТМ ГЕНЕРИРОВАНИЯ РАСШИРЕНОЙ ТОЧЕЧНОЙ
+! СТРУКТРУЫ С СОХРАНЕНИЕМ РАДИАЛЬНОЙ ФУНКЦИИ
+! РАСПРЕДЕЛЕНИЯ
+!
+!############################################################
+!     SUBROUTINE GENFR9
+!############################################################
+!
+!
+   SUBROUTINE GENFR9(N, X, Y, XM, YM, RMAX, K1, RF, RK,&
+      S, RF0, S0, RF1, S1, EPSR, NBUC, NREFER, IS, NPR, CPROB)
+!############################################################
+      INTEGER N,NG,N1
+      REAL*8, DIMENSION (:) :: X(N),Y(N),RF(K1),RK(K1),S(K1),&
+         RF1(K1),S1(K1),RF0(K1),S0(K1),&
+         RF0N(200),RF1N(200)
+      INTEGER, DIMENSION(:) :: NBUC
+      INTEGER, DIMENSION(:,:) :: NREFER
+      REAL*8 A,PRO,PROB,RASS0,RASSK,RH2,RR2,ORH2,&
+         XM,YM,RMAX,DENSE,XSTEP,YSTEP,DRASS,DIS2,&
+         XNOM,YNOM,TEMP,RAD,TEMP0,RATEMP,XJ,YJ,RASS,&
+         EPSR,CPROB,CPR,XMM,YMM
+!#############################################################
+      DATA CRMA,CTEMP/4.,0.5/
+      NG=N*9
+      N1=N+1
+      XMM=XM*3.
+      YMM=YM*3.
+      DO I=1,N
+         X(I)=X(I)+XM
+         Y(I)=Y(I)+YM
+      END DO
+!------- ГЕНЕРИРОВАНИЕ НАЧАЛЬНОГО РАЗМЕЩЕНИЯ ----------------
+      CALL SRAND1()
+      DO I=N1,NG
+110      CALL GENER(IS,A)
+         X(I)=A*XMM
+         CALL GENER(IS,A)
+         Y(I)=A*YMM
+         IF(INT(X(I)/XM).EQ.1.AND.INT(Y(I)/YM).EQ.1) GO TO 110
+      END DO
+
+      ! OPEN(UNIT=48,FILE='data_x.txt')
+      ! DO I=1,N
+      !    WRITE(48,*) X(I),Y(I)
+      ! END DO
+      ! CLOSE(48)
+
+      ! CALL SYSTEM('gnuplot -p data_plot_x.plt')
+
+      RH2=RK(1)*RK(1)
+      K2=INT(RMAX*RMAX/RH2)
+      IF(K2.GT.K1) GO TO 15
+      K1=K2
+15    RMAX=SQRT(RH2*K1)
+      RR2=RH2*K1
+      ORH2=1./RH2
+!------ ВЫЧИСЛЕНИЕ RFR НАЧАЛЬНОГО РАЗМЕЩЕНИЯ ----------------
+      ALF=0.1
+      EPS=1.96
+      CALL RFR1(NG,XMM,YMM,X,Y,ALF,EPS,RMAX,RF0,RK,S0,K1,1)
+      DENSE=FLOAT(N)/XM/YM
+      DO I=1,K1
+         RF0N(I) = RF0(I)*S0(I)*DENSE
+         RK(I)=RH2*I
+      END DO
+!------ ВЫЧИСЛИМ НАЧАЛЬНУЮ РАЗНОСТЬ -------------------------
+      CALL RASST(RF,RF0,RK,K1,RASS0)
+      RASSK=RASS0
+!------------- УПОРЯДОЧЕНИЕ ТОЧЕК ---------------------------
+      NX=INT(XMM/RMAX)
+      NY=INT(YMM/RMAX)
+      NXY=NX*NY
+      CALL BUCK(X,Y,NG,XMM,YMM,NREFER,NBUC,NX,NY,NXY)
+      XSTEP=XMM/FLOAT(NX)
+      YSTEP=YMM/FLOAT(NY)
+      TEMP=0.
+      CPR=1./CPROB
+!------ ПРОЦЕДУРА МЕТРОПОЛИСА -------------------------------
+      DO ITP=1,41
+         RAD=CRMA*RMAX
+         IF (ITP.NE.1) GO TO 17
+         NPRO=200
+         GO TO 18
+17       NPRO=NPR
+         CPR=CPR*CPROB
+         IF(ITP.EQ.2) GO TO 171
+         TEMP0=SQRT(TEMP/200.)
+         TEMP=TEMP0*CTEMP/CPROB
+         PRINT 77,TEMP0
+77       FORMAT(' НАЧАЛЬНАЯ ТЕМПЕРАТУРА =',F10.5)
+171      TEMP=TEMP*CPROB
+         RATEMP=TEMP/TEMP0
+         III=ITP-1
+         PRINT 88, III, RASS0, RATEMP
+88       FORMAT(' ШАГ НОМЕР ',I5,'  RASS0=', F10.5, 'T/T0=', F10.6)
+18       CONTINUE
+         DO ITP1=1,NPRO
+            DO I=1,K1
+               RF1(I)=RF0(I)
+               RF1N(I)=RF0N(I)
+               S1(I)=S0(I)
+            END DO
+!---------- ВЫБОР НОМЕРА ТОЧКИ ------------------------------
+71          CALL GENER(IS,A)
+            NOM=INT(A*NG)+1
+!--------- ОПРЕДЕЛЕНИЕ СОСЕДЕЙ И РАССТОЯНИЯ ДО НИХ ----------
+            XJ=X(NOM)
+            YJ=Y(NOM)
+            IF(INT(XJ/XM).EQ.1.AND.INT(YJ/YM).EQ.1) GO TO 71
+!--------- ОПРЕДЕЛЕНИЕ НОМЕРА ЦЕНТРАЛЬНОГО BUCKET'А ---------
+            IXX=INT(XJ/XSTEP)+1
+            IYY=INT(YJ/YSTEP)+1
+            DO JY=1,3
+               IYC=IYY-2+JY
+               IF(IYC.EQ.0.OR.IYC.EQ.NY+1) CYCLE
+               DO JX=1,3
+                  IXC=IXX-2+JX
+                  IF(IXC.EQ.0.OR.IXC.EQ.NX+1) CYCLE
+!---------- ВЫБОР НОМЕРОВ ТОЧЕК -----------------------------
+                  NOMXY=(IYC-1)*NX+IXC
+                  IF(NREFER(2,NOMXY).EQ.0) CYCLE
+                  INP=NREFER(1,NOMXY)
+                  IENP=INP+NREFER(2,NOMXY)-1
+                  DO JT=INP,IENP
+                     JJ=NBUC(JT)!BUG =(
+                     IF(JJ.EQ.NOM) CYCLE
+                     DIS2=(XJ-X(JJ))**2+(YJ-Y(JJ))**2
+                     IF(DIS2.GE.RR2) CYCLE
+                     NL=INT(DIS2*ORH2)+1
+                     RF1N(NL)=RF1N(NL)-2
+                  END DO
+               END DO
+            END DO
+
+            CALL AREA1(XMM,YMM,XJ,YJ,K1,RK,S1,RH2,1)
+!---------- ТОЧКА ИЗ`ЯТА, RF1 и S1 СКОРРЕКТИРОВАНЫ ----------
+!---------- ПОПРОБУЕМ ПЕРЕМЕСТИТЬ ТОЧКУ NOM -----------------
+101         CALL GENER(IS,A)
+            XNOM=X(NOM)+(A-0.5)*RAD
+            XNOM=XNOM-FLOAT(IENT(XNOM/XMM))*XMM
+            CALL GENER(IS,A)
+            YNOM=Y(NOM)+(A-0.5)*RAD
+            YNOM=YNOM-FLOAT(IENT(YNOM/YMM))*YMM
+            IF(INT(XNOM/XMM).EQ.1.AND.INT(YNOM/YMM).EQ.1) GO TO 101
+!--------- ОПРЕДЕЛЕНИЕ НОМЕРА ЦЕНТРАЛЬНОГО BUCKET'А ---------
+            IXX1=INT(XNOM/XSTEP)+1
+            IYY1=INT(YNOM/YSTEP)+1
+            DO JY=1,3
+               IYC=IYY1-2+JY
+               IF(IYC.EQ.0.OR.IYC.EQ.NY+1) CYCLE
+               DO JX=1,3
+                  IXC=IXX1-2+JX
+                  IF(IXC.EQ.0.OR.IXC.EQ.NX+1) CYCLE
+                  !---------- ВЫБОР НОМЕРОВ ТОЧЕК -----------------------------
+                  NOMXY1=(IYC-1)*NX+IXC
+                  IF(NREFER(2,NOMXY1).EQ.0) CYCLE
+                  INP=NREFER(1,NOMXY1)
+                  IENP=INP+NREFER(2,NOMXY1)-1
+                  DO JT=INP,IENP
+                     JJ=NBUC(JT)
+                     IF(JJ.EQ.NOM) CYCLE
+                     DIS2=(XNOM-X(JJ))**2+(YNOM-Y(JJ))**2
+                     IF(DIS2.GE.RR2) CYCLE
+                     NL=INT(DIS2*ORH2)+1
+                     RF1N(NL)=RF1N(NL)+2.
+                  END DO
+               END DO
+            END DO
+            CALL AREA1(XMM,YMM,XNOM,YNOM,K1,RK,S1,RH2,0)
+            !--------- ЗАКОНЧЕНО ПРОБНОЕ ПЕРЕМЕЩЕНИЕ --------------------
+            DO L=1,K1
+               RF0(L)=RF0N(L)/(S0(L)*DENSE)
+               RF1(L)=RF1N(L)/(S1(L)*DENSE)
+            END DO
+            !--------- ВЫЧИСЛЕНИЕ НАЧАЛЬНОЙ ТЕМПЕРАТУРЫ -----------------
+            IF(ITP.NE.1) GO TO 220
+            CALL RASST(RF,RF1,RK,K1,RASS)
+            DRASS=RASS-RASS0
+            TEMP=TEMP+DRASS*DRASS
+            RASS0=RASS
+            GO TO 250
+220         CALL RASST(RF,RF1,RK,K1,RASS)
+            IF(RASS.GT.RASS0) GO TO 400
+            !--------- РАЗНИЦА УМЕНЬШИЛАСЬ ! ----------------------------
+250         CONTINUE
+            DO I=1,K1
+               RF0N(I)=RF1N(I)
+               S0(I)=S1(I)
+            END DO
+            X(NOM)=XNOM
+            Y(NOM)=YNOM
+            RASS0=RASS
+            !--------- ПЕРЕУПОРЯДОЧИВАНИЕ ПОСЛЕ УДАЧНОГО СДВИГА ---------
+            NOLD=(IYY-1)*NX+IXX
+            NNEW=(IYY1-1)*NX+IXX1
+            I1=NREFER(1,NOLD)
+            I2=I1+NREFER(2,NOLD)-1
+            DO L=I1,I2
+               IF(NBUC(L).NE.NOM) CYCLE
+               NOMB1=L
+               EXIT
+            END DO
+            NREFER(2,NOLD)=NREFER(2,NOLD)-1
+            NREFER(2,NNEW)=NREFER(2,NNEW)+1
+            IF(NNEW.LE.NOLD) GO TO 600
+            NOMB2=NREFER(1,NNEW)-1
+            DO L=NOMB1,NOMB2
+               IF(L.LT.N) NBUC(L)=NBUC(L+1)
+            END DO
+            NBUC(NOMB2)=NOM
+            NU=NOLD+1
+            DO L=NU,NNEW
+               NREFER(1,L)=NREFER(1,L)-1
+            END DO
+            CYCLE
+600         IF(NNEW.EQ.NOLD) GO TO 700
+            NOMB2=NREFER(1,NNEW)
+            LZ=NOMB1-NOMB2
+            DO L=1,LZ
+               IL=NOMB1-L+1
+               NBUC(IL)=NBUC(IL-1)
+            END DO
+            NBUC(NOMB2)=NOM
+            NU=NNEW+1
+            DO L=NU,NOLD
+               NREFER(1,L)=NREFER(1,L)+1
+            END DO
+700         IF(RASS0.LT.EPSR) GO TO 2000
+            CYCLE
+400         CALL GENER(IS,PRO)
+            PROB=EXP((RASS0-RASS)/TEMP)
+            IF(PRO.LT.PROB) GO TO 250
+         END DO
+      END DO
+!------- КОНЕЦ ЦИКЛА ПРОЦЕДУРЫ МЕТРОПОЛИСА ------------------
+2000  CONTINUE
+      DO I=1,K1
+         RK(I) = SQRT(RK(I))
+      END DO
+      RETURN
+   END SUBROUTINE
 
 end module RFR
